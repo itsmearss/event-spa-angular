@@ -1,0 +1,53 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Categories</strong>
+      </c-card-header>
+      <c-card-body>
+        <button cButton color="info" [routerLink]="['/users/add']">
+          Add User
+        </button>
+        <table cTable striped>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Fullname</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>annurrs</td>
+              <td>Annur Riyadhus Solikhin</td>
+              <td>
+                <button cButton color="warning">Edit</button>
+                <button cButton color="danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>annurrs</td>
+              <td>Annur Riyadhus Solikhin</td>
+              <td>
+                <button cButton color="warning">Edit</button>
+                <button cButton color="danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>annurrs</td>
+              <td>Annur Riyadhus Solikhin</td>
+              <td>
+                <button cButton color="warning">Edit</button>
+                <button cButton color="danger">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

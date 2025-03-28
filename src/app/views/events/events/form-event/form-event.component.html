@@ -1,0 +1,84 @@
+<c-row>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong> {{ formType }} Event</strong>
+      </c-card-header>
+      <c-card-body>
+        <form
+          #customStylesForm="ngForm"
+          (ngSubmit)="onSubmit1()"
+          [validated]="customStylesValidated"
+          cForm
+          class="row g-3 needs-validation"
+        >
+          <c-col md="9">
+            <label cLabel for="validationCustom01">Title</label>
+            <input
+              cFormControl
+              id="validationCustom01"
+              required
+              type="text"
+              placeholder="Title event"
+            />
+          </c-col>
+          <c-col md="3">
+            <label cLabel for="validationCustom04">Category</label>
+            <select cSelect id="validationCustom04" required>
+              <option value="">Choose...</option>
+              <option>...</option>
+            </select>
+          </c-col>
+          <c-col md="12">
+            <label cLabel for="exampleFormControlTextarea1">Description </label>
+            <textarea
+              cFormControl
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </c-col>
+          <c-col md="4">
+            <label cLabel for="validationCustom02">Start Date</label>
+            <input cFormControl id="validationCustom02" required type="date" />
+          </c-col>
+          <c-col md="4">
+            <label cLabel for="validationCustom02">End Date</label>
+            <input cFormControl id="validationCustom02" required type="date" />
+          </c-col>
+          <c-col md="4">
+            <label cLabel for="validationCustomUsername">Max Attendees</label>
+            <input
+              aria-describedby="inputGroupPrepend"
+              cFormControl
+              id="validationCustomUsername"
+              required
+              type="number"
+            />
+          </c-col>
+          <c-col md="6">
+            <label cLabel for="validationCustom03">Flyer Image</label>
+            <input cFormControl id="validationCustom03" required type="file" />
+          </c-col>
+          <c-col md="6">
+            <label cLabel for="validationCustom05">Cover Image</label>
+            <input cFormControl id="validationCustom05" required type="file" />
+          </c-col>
+          <c-col xs="12">
+            <button cButton class="me-1" color="primary" type="submit">
+              Save
+            </button>
+            <button
+              (click)="onReset1()"
+              *ngIf="expression"
+              cButton
+              color="secondary"
+              type="reset"
+            >
+              Reset
+            </button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
