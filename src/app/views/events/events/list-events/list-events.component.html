@@ -6,75 +6,77 @@
       </c-card-header>
       <c-card-body>
         <button
-          class="mb-2"
+          class="mb-2 text-white fw-bold"
           cButton
           color="info"
           [routerLink]="['/events/events/add']"
         >
-          Add Event
+          ADD EVENT
         </button>
-        <table cTable striped>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Category</th>
-              <th scope="col">Start Time</th>
-              <th scope="col">End Time</th>
-              <th scope="col">Location</th>
-              <th scope="col">Max Attendees</th>
-              <th scope="col">Status</th>
-              <th scope="col" class="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Tegal Dev Workshop</td>
-              <td>Workshop</td>
-              <td>27-12-2024</td>
-              <td>27-12-2024</td>
-              <td>Tegal</td>
-              <td>100</td>
-              <td>Active</td>
-              <td class="text-center">
-                <button cButton color="success">View</button>
-                <button cButton color="warning">Edit</button>
-                <button cButton color="danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Tegal Dev Workshop</td>
-              <td>Workshop</td>
-              <td>27-12-2024</td>
-              <td>27-12-2024</td>
-              <td>Tegal</td>
-              <td>100</td>
-              <td>Active</td>
-              <td class="text-center">
-                <button cButton color="success">View</button>
-                <button cButton color="warning">Edit</button>
-                <button cButton color="danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Tegal Dev Workshop</td>
-              <td>Workshop</td>
-              <td>27-12-2024</td>
-              <td>27-12-2024</td>
-              <td>Tegal</td>
-              <td>100</td>
-              <td>Active</td>
-              <td class="text-center">
-                <button cButton color="success">View</button>
-                <button cButton color="warning">Edit</button>
-                <button cButton color="danger">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <c-card class="p-2">
+          <table cTable>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Category</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Location</th>
+                <th scope="col">Max Attendees</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Tegal Dev Workshop</td>
+                <td>Workshop</td>
+                <td>27-12-2024</td>
+                <td>27-12-2024</td>
+                <td>Tegal</td>
+                <td>100</td>
+                <td>Active</td>
+                <td class="text-center">
+                  <button cButton color="success" class="btn-sm">View</button>
+                  <button cButton color="warning" class="btn-sm">Edit</button>
+                  <button cButton color="danger" class="btn-sm">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Tegal Dev Workshop</td>
+                <td>Workshop</td>
+                <td>27-12-2024</td>
+                <td>27-12-2024</td>
+                <td>Tegal</td>
+                <td>100</td>
+                <td>Active</td>
+                <td class="text-center">
+                  <button cButton color="success" class="btn-sm">View</button>
+                  <button cButton color="warning" class="btn-sm">Edit</button>
+                  <button cButton color="danger" class="btn-sm">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Tegal Dev Workshop</td>
+                <td>Workshop</td>
+                <td>27-12-2024</td>
+                <td>27-12-2024</td>
+                <td>Tegal</td>
+                <td>100</td>
+                <td>Active</td>
+                <td class="text-center">
+                  <button cButton color="success" class="btn-sm">View</button>
+                  <button cButton color="warning" class="btn-sm">Edit</button>
+                  <button cButton color="danger" class="btn-sm">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </c-card>
       </c-card-body>
     </c-card>
   </c-col>

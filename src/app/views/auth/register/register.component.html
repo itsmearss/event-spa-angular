@@ -6,19 +6,71 @@
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
           <c-card-body class="p-4">
-            <form cForm>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
               <h1>Register</h1>
               <p class="text-body-secondary">Create your account</p>
+
+              <div
+                class="text-danger fw-sm"
+                *ngIf="
+                  registerForm.get('username')?.dirty &&
+                  registerForm.get('username')?.touched
+                "
+              >
+                <div *ngIf="registerForm.get('username')?.errors?.['required']">
+                  Username is required
+                </div>
+                <div
+                  *ngIf="registerForm.get('username')?.errors?.['minlength']"
+                >
+                  Username must be at least 3 characters
+                </div>
+                <div
+                  *ngIf="registerForm.get('username')?.errors?.['maxlength']"
+                >
+                  Username must be at most 20 characters
+                </div>
+              </div>
+              <!-- Username Field -->
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
                 <input
-                  autoComplete="name"
+                  autoComplete="username"
                   cFormControl
+                  formControlName="username"
                   placeholder="Username"
+                  [ngClass]="{
+                    'is-invalid':
+                      registerForm.get('username')?.invalid &&
+                      registerForm.get('username')?.touched
+                  }"
                 />
               </c-input-group>
+
+              <div
+                class="text-danger fw-sm"
+                *ngIf="
+                  registerForm.get('fullname')?.invalid &&
+                  registerForm.get('fullname')?.touched
+                "
+              >
+                <div *ngIf="registerForm.get('fullname')?.hasError('required')">
+                  Fullname is required
+                </div>
+                <div
+                  *ngIf="registerForm.get('fullname')?.hasError('minlength')"
+                >
+                  Fullname must be at least 3 characters
+                </div>
+                <div
+                  *ngIf="registerForm.get('fullname')?.hasError('maxlength')"
+                >
+                  Fullname must be at most 50 characters
+                </div>
+              </div>
+              <!-- Fullname Field -->
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
@@ -26,9 +78,33 @@
                 <input
                   autoComplete="fullname"
                   cFormControl
+                  formControlName="fullname"
                   placeholder="Fullname"
+                  [ngClass]="{
+                    'is-invalid':
+                      registerForm.get('fullname')?.invalid &&
+                      registerForm.get('fullname')?.touched
+                  }"
                 />
               </c-input-group>
+
+              <div
+                class="text-danger fw-sm"
+                *ngIf="
+                  registerForm.get('password')?.invalid &&
+                  registerForm.get('password')?.touched
+                "
+              >
+                <div *ngIf="registerForm.get('password')?.hasError('required')">
+                  Password is required
+                </div>
+                <div
+                  *ngIf="registerForm.get('password')?.hasError('minlength')"
+                >
+                  Password must be at least 6 characters
+                </div>
+              </div>
+              <!-- Password Field -->
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
@@ -36,10 +112,43 @@
                 <input
                   autoComplete="new-password"
                   cFormControl
+                  formControlName="password"
                   placeholder="Password"
                   type="password"
+                  [ngClass]="{
+                    'is-invalid':
+                      registerForm.get('password')?.invalid &&
+                      registerForm.get('password')?.touched
+                  }"
                 />
               </c-input-group>
+
+              <div
+                class="text-danger fw-sm"
+                *ngIf="
+                  registerForm.get('confirmPassword')?.invalid &&
+                  registerForm.get('confirmPassword')?.touched
+                "
+              >
+                <div *ngIf="registerForm.hasError('passwordMismatch')">
+                  Passwords do not match
+                </div>
+                <div
+                  *ngIf="
+                    registerForm.get('confirmPassword')?.hasError('required')
+                  "
+                >
+                  Confirm password is required
+                </div>
+                <div
+                  *ngIf="
+                    registerForm.get('confirmPassword')?.hasError('minlength')
+                  "
+                >
+                  Confirm password must be at least 6 characters
+                </div>
+              </div>
+              <!-- Confirm Password Field -->
               <c-input-group class="mb-4">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
@@ -47,14 +156,35 @@
                 <input
                   autoComplete="new-password"
                   cFormControl
-                  placeholder="Repeat password"
+                  formControlName="confirmPassword"
+                  placeholder="Confirm password"
                   type="password"
+                  [ngClass]="{
+                    'is-invalid':
+                      registerForm.get('confirmPassword')?.invalid &&
+                      registerForm.get('confirmPassword')?.touched
+                  }"
                 />
               </c-input-group>
               <div class="d-grid">
-                <button cButton color="success">Create Account</button>
+                <button
+                  cButton
+                  type="submit"
+                  class="fw-bold text-white"
+                  color="success"
+                  [disabled]="isLoading"
+                >
+                  <div class="" *ngIf="!isLoading">Register</div>
+                  <div class="" *ngIf="isLoading">
+                    <c-spinner aria-hidden="true" size="sm" /> Loading...
+                  </div>
+                </button>
               </div>
+              <!-- Error Message -->
             </form>
+            <c-alert [color]="typeMessage" class="mt-3" *ngIf="message != ''">
+              {{ message }}
+            </c-alert>
           </c-card-body>
         </c-card>
       </c-col>

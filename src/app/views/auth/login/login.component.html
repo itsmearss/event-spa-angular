@@ -6,9 +6,25 @@
       <c-col lg="8" xl="6">
         <c-card class="p-4">
           <c-card-body>
-            <form cForm>
+            <form
+              cForm
+              [formGroup]="loginForm"
+              (ngSubmit)="onSubmit()"
+              novalidate
+            >
               <h1>Login</h1>
               <p class="text-body-secondary">Sign In to your account</p>
+              <div
+                class="text-danger fw-sm"
+                *ngIf="
+                  loginForm.get('username')?.dirty &&
+                  loginForm.get('username')?.touched
+                "
+              >
+                <div *ngIf="loginForm.get('username')?.errors?.['required']">
+                  Username is required
+                </div>
+              </div>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
@@ -16,9 +32,26 @@
                 <input
                   autoComplete="username"
                   cFormControl
+                  formControlName="username"
+                  [ngClass]="{
+                    'is-invalid':
+                      loginForm.get('username')?.invalid &&
+                      loginForm.get('username')?.touched
+                  }"
                   placeholder="Username"
                 />
               </c-input-group>
+              <div
+                class="text-danger fw-sm"
+                *ngIf="
+                  loginForm.get('password')?.dirty &&
+                  loginForm.get('password')?.touched
+                "
+              >
+                <div *ngIf="loginForm.get('password')?.errors?.['required']">
+                  Password is required
+                </div>
+              </div>
               <c-input-group class="mb-4">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
@@ -26,13 +59,30 @@
                 <input
                   autoComplete="current-password"
                   cFormControl
+                  formControlName="password"
+                  [ngClass]="{
+                    'is-invalid':
+                      loginForm.get('password')?.invalid &&
+                      loginForm.get('password')?.touched
+                  }"
                   placeholder="Password"
                   type="password"
                 />
               </c-input-group>
               <c-row>
                 <c-col xs="6">
-                  <button cButton class="px-4" color="primary">Login</button>
+                  <button
+                    cButton
+                    class="px-4 fw-bold text-white"
+                    type="submit"
+                    color="primary"
+                    [disabled]="isLoading"
+                  >
+                    <div class="" *ngIf="!isLoading">Login</div>
+                    <div class="" *ngIf="isLoading">
+                      <c-spinner aria-hidden="true" size="sm" /> Loading...
+                    </div>
+                  </button>
                 </c-col>
                 <c-col class="text-right" xs="6">
                   <button
@@ -46,6 +96,9 @@
                 </c-col>
               </c-row>
             </form>
+            <c-alert [color]="typeMessage" class="mt-3" *ngIf="message != ''">
+              {{ message }}
+            </c-alert>
           </c-card-body>
         </c-card>
       </c-col>
