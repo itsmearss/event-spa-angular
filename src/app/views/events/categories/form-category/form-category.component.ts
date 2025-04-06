@@ -1,14 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { NgStyle } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DocsExampleComponent } from '@docs-components/public-api';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ButtonDirective,
   CardBodyComponent,
   CardComponent,
   CardHeaderComponent,
   ColComponent,
-  ColDirective,
   FormControlDirective,
   FormDirective,
   FormLabelDirective,
@@ -17,6 +16,8 @@ import {
   RowDirective,
   TextColorDirective,
 } from '@coreui/angular';
+import { Category } from '../../../../models/category.model';
+import { CategoryService } from '../../../../services/category.service';
 
 @Component({
   selector: 'app-form-category',
@@ -39,6 +40,59 @@ import {
   templateUrl: './form-category.component.html',
   styleUrl: './form-category.component.scss',
 })
-export class FormCategoryComponent {
+export class FormCategoryComponent implements OnInit {
+  form: FormGroup | any;
+
   @Input() formType!: string;
+  @Input() dataCategory: Category = {
+    id: 0,
+    name: '',
+  };
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _categoryService: CategoryService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.form = this._formBuilder.group({
+      name: '',
+    });
+
+    if (this.formType === 'Edit') {
+      const { id } = this._activatedRoute.snapshot.params;
+      this._categoryService.getById(id).subscribe((category) => {
+        this.form.patchValue({
+          name: category.name,
+        });
+      });
+    }
+  }
+
+  onSubmit() {
+    if (this.formType === 'Add') {
+      const data = {
+        name: this.form.get('name')?.value,
+      };
+
+      this._categoryService.create(data).subscribe((response) => {
+        if (response) {
+          this._router.navigate(['/events/categories']);
+        }
+      });
+    } else {
+      const { id } = this._activatedRoute.snapshot.params;
+      const data = {
+        name: this.form.get('name')?.value,
+      };
+
+      this._categoryService.update(id, data).subscribe((response) => {
+        if (response) {
+          this._router.navigate(['/events/categories']);
+        }
+      });
+    }
+  }
 }

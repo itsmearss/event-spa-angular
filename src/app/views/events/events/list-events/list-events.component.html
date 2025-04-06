@@ -29,50 +29,45 @@
               </tr>
             </thead>
             <tbody>
+              @for(event of events; track event.id; let i = $index) {
               <tr>
-                <th scope="row">1</th>
-                <td>Tegal Dev Workshop</td>
-                <td>Workshop</td>
-                <td>27-12-2024</td>
-                <td>27-12-2024</td>
-                <td>Tegal</td>
-                <td>100</td>
-                <td>Active</td>
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ event.title }}</td>
+                <td>
+                  @for(category of categories; track category.id) {
+                  <ng-container *ngIf="category.id == event.categoryId">
+                    {{ category.name }}
+                  </ng-container>
+                  }
+                </td>
+                <td>{{ event.startTime }}</td>
+                <td>{{ event.endTime }}</td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.maxAttendees }}</td>
+                <td>{{ event.status }}</td>
                 <td class="text-center">
                   <button cButton color="success" class="btn-sm">View</button>
-                  <button cButton color="warning" class="btn-sm">Edit</button>
-                  <button cButton color="danger" class="btn-sm">Delete</button>
+                  <button
+                    cButton
+                    class="btn-sm"
+                    [routerLink]="['/events/events/edit', event.id]"
+                    color="warning"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    cButton
+                    class="btn-sm"
+                    (click)="deleteEvent(event.id)"
+                    color="danger"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Tegal Dev Workshop</td>
-                <td>Workshop</td>
-                <td>27-12-2024</td>
-                <td>27-12-2024</td>
-                <td>Tegal</td>
-                <td>100</td>
-                <td>Active</td>
-                <td class="text-center">
-                  <button cButton color="success" class="btn-sm">View</button>
-                  <button cButton color="warning" class="btn-sm">Edit</button>
-                  <button cButton color="danger" class="btn-sm">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Tegal Dev Workshop</td>
-                <td>Workshop</td>
-                <td>27-12-2024</td>
-                <td>27-12-2024</td>
-                <td>Tegal</td>
-                <td>100</td>
-                <td>Active</td>
-                <td class="text-center">
-                  <button cButton color="success" class="btn-sm">View</button>
-                  <button cButton color="warning" class="btn-sm">Edit</button>
-                  <button cButton color="danger" class="btn-sm">Delete</button>
-                </td>
+              }
+              <tr *ngIf="events.length == 0">
+                <td colspan="9" class="text-center">Kosong</td>
               </tr>
             </tbody>
           </table>

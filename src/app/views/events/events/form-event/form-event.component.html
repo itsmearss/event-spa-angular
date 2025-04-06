@@ -6,28 +6,51 @@
       </c-card-header>
       <c-card-body>
         <form
-          #customStylesForm="ngForm"
-          (ngSubmit)="onSubmit1()"
+          #f="ngForm"
+          (ngSubmit)="onSubmit()"
           [validated]="customStylesValidated"
           cForm
           class="row g-3 needs-validation"
+          enctype="multipart/form-data"
+          [formGroup]="form"
         >
-          <c-col md="9">
+          <c-col md="6">
             <label cLabel for="validationCustom01">Title</label>
             <input
               cFormControl
               id="validationCustom01"
               required
               type="text"
+              formControlName="title"
+              name="title"
               placeholder="Title event"
             />
           </c-col>
           <c-col md="3">
             <label cLabel for="validationCustom04">Category</label>
-            <select cSelect id="validationCustom04" required>
-              <option value="">Choose...</option>
-              <option>...</option>
+            <select
+              cSelect
+              id="validationCustom04"
+              required
+              name="categoryId"
+              formControlName="categoryId"
+            >
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{ category.name }}
+              </option>
             </select>
+          </c-col>
+          <c-col md="3">
+            <label cLabel for="validationCustom01">Location</label>
+            <input
+              cFormControl
+              id="validationCustom01"
+              required
+              type="text"
+              formControlName="location"
+              name="location"
+              placeholder="Location event"
+            />
           </c-col>
           <c-col md="12">
             <label cLabel for="exampleFormControlTextarea1">Description </label>
@@ -35,15 +58,33 @@
               cFormControl
               id="exampleFormControlTextarea1"
               rows="3"
+              required
+              formControlName="description"
+              name="description"
+              placeholder="Description event"
             ></textarea>
           </c-col>
           <c-col md="4">
             <label cLabel for="validationCustom02">Start Date</label>
-            <input cFormControl id="validationCustom02" required type="date" />
+            <input
+              cFormControl
+              id="validationCustom02"
+              required
+              type="date"
+              formControlName="startTime"
+              name="startTime"
+            />
           </c-col>
           <c-col md="4">
             <label cLabel for="validationCustom02">End Date</label>
-            <input cFormControl id="validationCustom02" required type="date" />
+            <input
+              cFormControl
+              id="validationCustom02"
+              required
+              type="date"
+              formControlName="endTime"
+              name="endTime"
+            />
           </c-col>
           <c-col md="4">
             <label cLabel for="validationCustomUsername">Max Attendees</label>
@@ -52,28 +93,54 @@
               cFormControl
               id="validationCustomUsername"
               required
+              formControlName="maxAttendees"
+              name="maxAttendees"
               type="number"
             />
           </c-col>
           <c-col md="6">
             <label cLabel for="validationCustom03">Flyer Image</label>
-            <input cFormControl id="validationCustom03" required type="file" />
+            <input
+              cFormControl
+              id="validationCustom03"
+              required
+              type="file"
+              name="flyer"
+              (change)="onFileSelected($event)"
+            />
           </c-col>
           <c-col md="6">
             <label cLabel for="validationCustom05">Cover Image</label>
-            <input cFormControl id="validationCustom05" required type="file" />
+            <input
+              cFormControl
+              id="validationCustom05"
+              required
+              type="file"
+              name="cover"
+              (change)="onFileSelected2($event)"
+            />
+          </c-col>
+          <c-col md="6" *ngIf="previewUrl">
+            <img
+              [src]="previewUrl"
+              alt="Preview"
+              class="img-fluid rounded-start"
+              style="max-width: 200px; max-height: 200px"
+            />
+          </c-col>
+          <c-col md="6" *ngIf="previewUrl2">
+            <img
+              [src]="previewUrl2"
+              alt="Preview"
+              class="img-fluid rounded-start"
+              style="max-width: 200px; max-height: 200px"
+            />
           </c-col>
           <c-col xs="12">
             <button cButton class="me-1" color="primary" type="submit">
               Save
             </button>
-            <button
-              (click)="onReset1()"
-              *ngIf="expression"
-              cButton
-              color="secondary"
-              type="reset"
-            >
+            <button (click)="onReset1()" cButton color="secondary" type="reset">
               Reset
             </button>
           </c-col>

@@ -14,37 +14,37 @@
               <th scope="col">#</th>
               <th scope="col">Username</th>
               <th scope="col">Fullname</th>
+              <th scope="col">Role</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
+            @for(user of users; track user.id; let i = $index){
             <tr>
-              <th scope="row">1</th>
-              <td>annurrs</td>
-              <td>Annur Riyadhus Solikhin</td>
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.username }}</td>
+              <td>{{ user.fullname }}</td>
               <td>
-                <button cButton color="warning">Edit</button>
-                <button cButton color="danger">Delete</button>
+                @for(role of roles; track role.id){
+                <ng-container *ngIf="user.roleId == role.id">
+                  {{ role.name }}
+                </ng-container>
+                }
+              </td>
+              <td>
+                <button
+                  cButton
+                  [routerLink]="['/users/edit', user.id]"
+                  color="warning"
+                >
+                  Edit
+                </button>
+                <button cButton (click)="deleteUser(user.id)" color="danger">
+                  Delete
+                </button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>annurrs</td>
-              <td>Annur Riyadhus Solikhin</td>
-              <td>
-                <button cButton color="warning">Edit</button>
-                <button cButton color="danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>annurrs</td>
-              <td>Annur Riyadhus Solikhin</td>
-              <td>
-                <button cButton color="warning">Edit</button>
-                <button cButton color="danger">Delete</button>
-              </td>
-            </tr>
+            }
           </tbody>
         </table>
       </c-card-body>
