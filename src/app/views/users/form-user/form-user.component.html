@@ -4,15 +4,22 @@
       <strong> {{ formType }} User</strong>
     </c-card-header>
     <c-card-body>
-      <form cForm class="row gx-3 gy-2 align-items-center">
+      <form
+        cForm
+        class="row gx-3 gy-2 align-items-center"
+        [formGroup]="form"
+        #f="ngForm"
+        (ngSubmit)="onSubmit()"
+      >
         <c-col sm="6">
           <label cLabel for="specificSizeSelect"> Fullname </label>
-
           <input
             cFormControl
             id="specificSizeInputName"
             placeholder="Jane Doe"
             type="text"
+            name="fullname"
+            formControlName="fullname"
           />
         </c-col>
         <c-col sm="6">
@@ -24,6 +31,8 @@
               id="specificSizeInputGroupUsername"
               placeholder="Username"
               type="text"
+              name="username"
+              formControlName="username"
             />
           </c-input-group>
         </c-col>
@@ -34,16 +43,22 @@
             type="password"
             cFormControl
             id="specificSizeInputName"
-            placeholder="Jane Doe"
+            name="password"
+            placeholder="Password"
           />
         </c-col>
         <c-col sm="6">
           <label cLabel for="specificSizeSelect"> Role </label>
-          <select cSelect id="specificSizeSelect">
-            <option>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select
+            cSelect
+            id="specificSizeSelect"
+            formControlName="roleId"
+            name="roleId"
+          >
+            <option value="" disabled selected hidden>Choose Role</option>
+            <option *ngFor="let role of roles" [value]="role.id">
+              {{ role.name }}
+            </option>
           </select>
         </c-col>
         <c-col xs="auto">

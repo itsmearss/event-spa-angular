@@ -5,16 +5,24 @@
         <strong>{{ formType }} Category</strong>
       </c-card-header>
       <c-card-body>
-        <form cForm [gutter]="3" cRow>
+        <form
+          cForm
+          [gutter]="3"
+          cRow
+          [formGroup]="form"
+          #f="ngForm"
+          (ngSubmit)="onSubmit()"
+        >
           <c-col xs="auto">
             <label cLabel class="visually-hidden" for="inputCategory">
-              Password
+              Category
             </label>
             <input
               cFormControl
               id="inputCategory"
               placeholder="Category"
               type="text"
+              formControlName="name"
             />
           </c-col>
           <c-col xs="auto">
