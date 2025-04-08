@@ -4,7 +4,6 @@ import { RouterLink, Router } from '@angular/router';
 import {
   FormsModule,
   FormBuilder,
-  FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -26,6 +25,8 @@ import {
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StorageService } from 'src/app/services/auth/storage.service';
 import { NgIf, NgClass } from '@angular/common';
+import Swal from 'sweetalert2';
+import { set } from 'lodash-es';
 
 @Component({
   selector: 'app-login',
@@ -93,6 +94,11 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe({
       next: (data) => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Login successful',
+          icon: 'success',
+        });
         this.storageService.saveUser(data);
 
         console.log(data);
@@ -105,6 +111,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
+        Swal.fire({
+          title: 'Warning!',
+          text: 'User ID or Password is wrong',
+          icon: 'warning',
+        });
         this.isLoading = false;
         this.isSignInFailed = true;
         this.message = err.error.message;

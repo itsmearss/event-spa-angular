@@ -14,6 +14,8 @@ import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
 import { httpInterceptorProviders } from './helpers/auth.interceptor';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { NavbarModule } from '@coreui/angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,10 +36,12 @@ export const appConfig: ApplicationConfig = {
       SidebarModule,
       DropdownModule,
       HttpClientModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      NavbarModule
     ),
     IconSetService,
     provideAnimationsAsync(),
     httpInterceptorProviders,
+    SweetAlert2Module,
   ],
 };

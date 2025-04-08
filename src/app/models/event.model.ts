@@ -1,13 +1,15 @@
+import { Time } from '@angular/common';
+
 export class Event {
   id?: number;
   title?: string;
   description?: string;
-  startTime?: Date;
-  endTime?: Date;
+  date?: Date;
+  time?: Time;
   location?: string;
   categoryId?: number;
   maxAttendees?: number;
-  status?: string;
+  status?: number;
   flyer?: any;
   cover?: any;
   createdAt?: Date;

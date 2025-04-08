@@ -2,12 +2,32 @@
   <c-col xs="12">
     <c-card class="mb-4">
       <c-card-header>
-        <strong>Categories</strong>
+        <strong>Users</strong>
       </c-card-header>
       <c-card-body>
         <button cButton color="info" [routerLink]="['/users/add']">
           Add User
         </button>
+        <form
+          class="my-3 row"
+          #f="ngForm"
+          (ngSubmit)="onSubmit()"
+          enctype="multipart/form-data"
+        >
+          <c-col md="4">
+            <input
+              cFormControl
+              required
+              type="file"
+              (change)="onFileSelected($event)"
+            />
+          </c-col>
+          <c-col md="6">
+            <button cButton class="me-1" color="primary" type="submit">
+              Import
+            </button>
+          </c-col>
+        </form>
         <table cTable striped>
           <thead>
             <tr>

@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 import { AuthGuard } from './auth.guard';
+import { LandingPageComponent } from './views/landing-page/landing-page.component';
+import { NavbarComponent } from './views/landing-page/component/navbar/navbar.component';
+import { PastEventPageComponent } from './views/past-event-page/past-event-page.component';
+import { UpcomingEventPageComponent } from './views/upcoming-event-page/upcoming-event-page.component';
 
 export const routes: Routes = [
   {
@@ -14,9 +18,13 @@ export const routes: Routes = [
     data: {
       title: 'Home',
     },
+
     children: [
       {
         path: 'dashboard',
+        data: {
+          roles: ['Admin', 'User'],
+        },
         loadChildren: () =>
           import('./views/dashboard/routes').then((m) => m.routes),
         canActivate: [AuthGuard],
@@ -67,17 +75,35 @@ export const routes: Routes = [
       },
       {
         path: 'events',
+        data: {
+          roles: ['Admin'],
+        },
         loadChildren: () =>
           import('./views/events/routes').then((m) => m.routes),
         canActivate: [AuthGuard],
       },
       {
         path: 'users',
+        data: {
+          roles: ['Admin'],
+        },
         loadChildren: () =>
           import('./views/users/routes').then((m) => m.routes),
         canActivate: [AuthGuard],
       },
     ],
+  },
+  {
+    path: 'landing-page',
+    loadComponent: () => LandingPageComponent,
+  },
+  {
+    path: 'past-event',
+    loadComponent: () => PastEventPageComponent,
+  },
+  {
+    path: 'upcoming-event',
+    loadComponent: () => UpcomingEventPageComponent,
   },
   {
     path: '404',
@@ -90,7 +116,7 @@ export const routes: Routes = [
     },
   },
   {
-    path: '500',
+    path: 'unauthorized',
     loadComponent: () =>
       import('./views/pages/page500/page500.component').then(
         (m) => m.Page500Component

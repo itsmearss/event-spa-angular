@@ -1,0 +1,19 @@
+<c-card style="width: 18rem">
+  <ng-container *ngTemplateOutlet="imgAngularTemplate" />
+  <img
+    [src]="'http://localhost:5076/Resources/' + event.flyer"
+    class="card-img-top"
+    alt="..."
+  />
+  <c-card-body>
+    <p cCardTitle class="text-info mb-2">{{ event.category }}</p>
+    <h5 cCardText>{{ event.title }}</h5>
+    <p cCardText>{{ event.description }}</p>
+  </c-card-body>
+  <ul [flush]="true" cListGroup>
+    <li cListGroupItem class="d-flex justify-content-between align-items-start">
+      <button cButton class="btn-sm" color="primary">Detail</button>
+      <p class="my-auto">{{ event.date }}</p>
+    </li>
+  </ul>
+</c-card>

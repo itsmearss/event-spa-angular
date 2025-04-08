@@ -23,6 +23,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { NgFor } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-user',
@@ -94,10 +95,23 @@ export class FormUserComponent implements OnInit {
         password: this.form.value.password,
         roleId: this.form.value.roleId,
       };
-      this._userService.create(data).subscribe(() => {
-        console.log('User created successfully');
-        this._router.navigate(['/users']);
-      });
+      this._userService.create(data).subscribe(
+        (data) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'User Created',
+          });
+          this._router.navigate(['/users']);
+        },
+        (error) => {
+          console.error('Error creating user:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while creating the user.',
+          });
+        }
+      );
     } else if (this.formType === 'Edit') {
       const { id } = this._activatedRoute.snapshot.params;
       const data = {

@@ -24,7 +24,7 @@ import {
 
 import { IconDirective } from '@coreui/icons-angular';
 import { StorageService } from 'src/app/services/auth/storage.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',

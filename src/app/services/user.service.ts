@@ -28,4 +28,13 @@ export class UserService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>('http://localhost:5076/api/user/' + id);
   }
+
+  uploadExcel(file: File) {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post(
+      'http://localhost:5076/api/user/upload-excel',
+      formData
+    );
+  }
 }

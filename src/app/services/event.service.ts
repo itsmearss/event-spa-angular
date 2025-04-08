@@ -28,4 +28,10 @@ export class EventService {
   deleteEvent(id: number): Observable<void> {
     return this.http.delete<void>('http://localhost:5076/api/event/' + id);
   }
+
+  exportEventsToExcel(): Observable<Blob> {
+    return this.http.get('http://localhost:5076/api/event/get-export-event', {
+      responseType: 'blob',
+    });
+  }
 }

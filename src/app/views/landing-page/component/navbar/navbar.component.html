@@ -1,0 +1,54 @@
+<c-navbar colorScheme="light" expand="lg" class="bg-light">
+  <c-container fluid>
+    <a cNavbarBrand href="https://coreui.io/angular/" target="_blank">
+      TSH Event
+    </a>
+    <button [cNavbarToggler]="collapseRef"></button>
+    <div #collapseRef="cCollapse" navbar cCollapse>
+      <c-navbar-nav class="m-auto mb-2 mb-lg-0">
+        <c-nav-item>
+          <a cNavLink [routerLink]="['/landing-page']">Home</a>
+        </c-nav-item>
+        <c-nav-item>
+          <a cNavLink>About</a>
+        </c-nav-item>
+        <c-nav-item>
+          <a cNavLink [routerLink]="['/upcoming-event']">Upcoming</a>
+        </c-nav-item>
+        <c-nav-item>
+          <a
+            cNavLink
+            [routerLink]="['/past-event']"
+            routerLinkActive="router-link-active"
+            >Past</a
+          >
+        </c-nav-item>
+        <!-- <c-dropdown variant="nav-item" [popper]="false">
+          <a cDropdownToggle cNavLink>Dropdown</a>
+          <ul cDropdownMenu>
+            <li><button cDropdownItem>Action</button></li>
+            <li><button cDropdownItem>Another action</button></li>
+            <li><button cDropdownItem>Something else here</button></li>
+          </ul>
+        </c-dropdown> -->
+      </c-navbar-nav>
+      <button
+        cButton
+        class="me-2 text-white fw-medium"
+        [routerLink]="['/login']"
+        routerLinkActive="router-link-active"
+        color="dark"
+      >
+        Login
+      </button>
+      <button
+        cButton
+        class="text-white fw-medium"
+        [routerLink]="['/register']"
+        color="dark"
+      >
+        Register
+      </button>
+    </div>
+  </c-container>
+</c-navbar>

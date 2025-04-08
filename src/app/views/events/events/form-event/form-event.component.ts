@@ -22,7 +22,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../../services/event.service';
 import { CategoryService } from '../../../../services/category.service';
 import { NgFor, NgIf } from '@angular/common';
-import { Event } from '../../../../models/event.model';
 import { Category } from '../../../../models/category.model';
 
 @Component({
@@ -56,6 +55,12 @@ export class FormEventComponent implements OnInit {
 
   selectedFile2: File | null = null;
   previewUrl2: string | ArrayBuffer | null = null;
+
+  status = [
+    { id: 0, name: 'Scheduled' },
+    { id: 1, name: 'Ended' },
+    { id: 2, name: 'Cancelled' },
+  ];
 
   constructor(
     private _eventService: EventService,
@@ -115,8 +120,8 @@ export class FormEventComponent implements OnInit {
     this.form = this._formBuilder.group({
       title: [''],
       description: [''],
-      startTime: [''],
-      endTime: [''],
+      date: [''],
+      time: [''],
       location: [''],
       categoryId: [''],
       maxAttendees: [''],
@@ -132,10 +137,8 @@ export class FormEventComponent implements OnInit {
         this.form.patchValue({
           title: event.title,
           description: event.description,
-          startTime: event.startTime
-            ? this.toDateOnlyString(event.startTime)
-            : '',
-          endTime: event.endTime ? this.toDateOnlyString(event.endTime) : '',
+          date: event.date ? this.toDateOnlyString(event.date) : '',
+          time: event.time ? event.time : '',
           location: event.location,
           categoryId: event.categoryId,
           maxAttendees: event.maxAttendees,
@@ -153,8 +156,8 @@ export class FormEventComponent implements OnInit {
       const formData = new FormData();
       formData.append('title', this.form.get('title')?.value);
       formData.append('description', this.form.get('description')?.value);
-      formData.append('startTime', this.form.get('startTime')?.value);
-      formData.append('endTime', this.form.get('endTime')?.value);
+      formData.append('date', this.form.get('date')?.value);
+      formData.append('time', this.form.get('time')?.value);
       formData.append('location', this.form.get('location')?.value);
       formData.append('categoryId', this.form.get('categoryId')?.value);
       formData.append('maxAttendees', this.form.get('maxAttendees')?.value);
@@ -175,11 +178,12 @@ export class FormEventComponent implements OnInit {
       const formData = new FormData();
       formData.append('title', this.form.get('title')?.value);
       formData.append('description', this.form.get('description')?.value);
-      formData.append('startTime', this.form.get('startTime')?.value);
-      formData.append('endTime', this.form.get('endTime')?.value);
+      formData.append('date', this.form.get('date')?.value);
+      formData.append('time', this.form.get('time')?.value);
       formData.append('location', this.form.get('location')?.value);
       formData.append('categoryId', this.form.get('categoryId')?.value);
       formData.append('maxAttendees', this.form.get('maxAttendees')?.value);
+      formData.append('status', this.form.get('status')?.value);
       if (this.selectedFile) {
         formData.append('flyer', this.selectedFile, this.selectedFile.name);
       }

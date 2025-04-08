@@ -8,6 +8,8 @@ import {
   CardHeaderComponent,
   CardBodyComponent,
   TableDirective,
+  FormLabelDirective,
+  FormControlDirective,
   TableColorDirective,
   TableActiveDirective,
   BorderDirective,
@@ -31,6 +33,8 @@ import { CategoryService } from '../../../../services/category.service';
     CardBodyComponent,
     TableDirective,
     ButtonDirective,
+    FormLabelDirective,
+    FormControlDirective,
     RouterLink,
     NgIf,
   ],
@@ -79,6 +83,18 @@ export class ListEventsComponent implements OnInit {
     this._eventService.deleteEvent(id).subscribe(() => {
       console.log('Event deleted successfully');
       this.retrieveEvents(); // Refresh the list after deletion
+    });
+  }
+
+  exportToExcel(): void {
+    this._eventService.exportEventsToExcel().subscribe((response) => {
+      const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'events.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
     });
   }
 }

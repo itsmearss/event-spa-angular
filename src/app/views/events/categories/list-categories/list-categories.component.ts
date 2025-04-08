@@ -13,6 +13,7 @@ import {
 import { CategoryService } from '../../../../services/category.service';
 import { Category } from '../../../../models/category.model';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-categories',
@@ -53,9 +54,19 @@ export class ListCategoriesComponent implements OnInit {
   }
 
   deleteCategory(id: any): void {
-    this.categoryService.delete(id).subscribe(() => {
-      console.log('Category deleted successfully');
-      this.retrieveCategories(); // Refresh the list after deletion
+    Swal.fire({
+      title: 'Do you want to delete this category?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.categoryService.delete(id).subscribe(() => {
+          console.log('Category deleted successfully');
+          this.retrieveCategories(); // Refresh the list after deletion
+        });
+        Swal.fire('Deleted!', '', 'success');
+      }
     });
   }
 }

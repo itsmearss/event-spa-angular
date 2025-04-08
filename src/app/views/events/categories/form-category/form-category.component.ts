@@ -18,6 +18,8 @@ import {
 } from '@coreui/angular';
 import { Category } from '../../../../models/category.model';
 import { CategoryService } from '../../../../services/category.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-category',
@@ -79,6 +81,10 @@ export class FormCategoryComponent implements OnInit {
 
       this._categoryService.create(data).subscribe((response) => {
         if (response) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Category Created',
+          });
           this._router.navigate(['/events/categories']);
         }
       });

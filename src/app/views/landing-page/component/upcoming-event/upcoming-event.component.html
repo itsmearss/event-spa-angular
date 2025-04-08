@@ -1,0 +1,10 @@
+<c-container class="my-4">
+  <h3 class="text-center mb-4">Upcoming Event</h3>
+  <c-row>
+    @for(event of events; track event.id){ @if (event.status == 0) {
+    <c-col xs="4" class="d-flex justify-content-center">
+      <app-event-card [event]="event"></app-event-card>
+    </c-col>
+    } }
+  </c-row>
+</c-container>

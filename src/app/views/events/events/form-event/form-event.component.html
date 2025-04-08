@@ -35,12 +35,30 @@
               name="categoryId"
               formControlName="categoryId"
             >
+              <option value="" disabled selected hidden>Choose Category</option>
+
               <option *ngFor="let category of categories" [value]="category.id">
                 {{ category.name }}
               </option>
             </select>
           </c-col>
-          <c-col md="3">
+          <c-col md="3" *ngIf="formType == 'Edit'">
+            <label cLabel for="validationCustom04">Status</label>
+            <select
+              cSelect
+              id="validationCustom04"
+              required
+              formControlName="status"
+              name="status"
+            >
+              <option value="" disabled selected hidden>Choose Status</option>
+
+              <option *ngFor="let item of status" [value]="item.id">
+                {{ item.name }}
+              </option>
+            </select>
+          </c-col>
+          <c-col md="6">
             <label cLabel for="validationCustom01">Location</label>
             <input
               cFormControl
@@ -53,7 +71,7 @@
             />
           </c-col>
           <c-col md="12">
-            <label cLabel for="exampleFormControlTextarea1">Description </label>
+            <label cLabel for="exampleFormControlTextarea1">Description</label>
             <textarea
               cFormControl
               id="exampleFormControlTextarea1"
@@ -65,25 +83,25 @@
             ></textarea>
           </c-col>
           <c-col md="4">
-            <label cLabel for="validationCustom02">Start Date</label>
+            <label cLabel for="validationCustom02">Date</label>
             <input
               cFormControl
               id="validationCustom02"
               required
               type="date"
-              formControlName="startTime"
-              name="startTime"
+              formControlName="date"
+              name="date"
             />
           </c-col>
           <c-col md="4">
-            <label cLabel for="validationCustom02">End Date</label>
+            <label cLabel for="validationCustom02">Time</label>
             <input
               cFormControl
               id="validationCustom02"
               required
-              type="date"
-              formControlName="endTime"
-              name="endTime"
+              type="time"
+              formControlName="time"
+              name="time"
             />
           </c-col>
           <c-col md="4">
